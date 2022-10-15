@@ -2,7 +2,6 @@ const width=400;
 const height=600;
 let randomWidth=Math.random()*width;
 let randomHeight=Math.random()*height;
-console.log("random width and height"+randomWidth,randomHeight)
 const colors=['blue','red'];
 //     const pauseButton=document.getElementById("pause");
 //     pauseButton.addEventListener("click",()=>{
