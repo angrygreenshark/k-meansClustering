@@ -40,7 +40,7 @@ function draw() {
     for (let l = 0; l < arr.length; l++) {
         let x=abs(arr[l].x);
         let y=abs(arr[l].y);
-        console.log("random:"+x*randomWidth,y*randomHeight);
+        // console.log("random:"+x*randomWidth,y*randomHeight);
         drawAndColor(x*randomWidth,y*randomHeight,"yellow");
     }
 }
