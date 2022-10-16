@@ -3,13 +3,27 @@ const height=600;
 let randomWidth=Math.random()*width;
 let randomHeight=Math.random()*height;
 const colors=['blue','red'];
+let dataset=10;
 //     const pauseButton=document.getElementById("pause");
 //     pauseButton.addEventListener("click",()=>{
-
-// })   
+    
+    // })
+    // * dataset 
+const slider=document.getElementById("datasetter");
+let sorting_speed=slider.value
+slider.oninput = function() {
+  dataset= this.value;
+  draw();
+}  
+// * regenerate button 
+const regenerate_button=document.getElementById("regenerate");
+regenerate_button.addEventListener("click",()=>{
+    clear();
+    draw();
+}); 
 // * randomise collection
 const randomise_button=document.getElementById("randomize-button");
-randomise_button.addEventListener('click',()=>{
+randomise_button.addEventListener('click',()=>{window.location.reload();
     clear();
     draw();
 });
@@ -18,7 +32,7 @@ function setup() {
 }
 function draw() {
     frameRate(0);
-    let arr=generateRandomVectors(10);
+    let arr=generateRandomVectors(dataset);
     // console.log(arr);
     // * pause button
     const cluster_button=document.getElementById("cluster");
@@ -26,6 +40,7 @@ function draw() {
     console.log("Clustering...");
     clear();
     Kmeans(arr);
+    // generateTable(Kmeans);
     });
     // *
     let k=3;
@@ -52,13 +67,12 @@ function generateRandomVectors(number) {
 }
 function generateTable(arr) {
     // creates a <table> element and a <tbody> element
-    const tbl = document.createElement("table");
+    const tbl = document.getElementById("table_")
     const tblBody = document.createElement("tbody");
     // creating all cells
     for (let i = 0; i < arr.length; i++) {
       // creates a table row
       const row = document.createElement("tr");
-  
       for (let j = 0; j < 2; j++) {
         // Create a <td> element and a text node, make the text
         // node the contents of the <td>, and put the <td> at
@@ -67,8 +81,12 @@ function generateTable(arr) {
         const cellText = document.createTextNode(`${abs(arr[i].x)*random(width)} , ${abs(arr[i].y)*random(height)}`)
         cell.appendChild(cellText);
         row.appendChild(cell);
-      }
-  
+    }
+    const clustercell = document.createElement("td");
+    const clustercelltext=document.createTextNode(`${i}`);
+    clustercell.appendChild(clustercelltext);
+    row.appendChild(clustercell);
+    
       // add the row to the end of the table body
       tblBody.appendChild(row);
     }
@@ -88,7 +106,8 @@ function CalculateDist(v1,v2) {
 }
 // k-means-clustering function
 function Kmeans(arr) {
-    let k=3;
+    // let iteration=1;
+    
     let first=arr[0];
     let second=arr[1];
     // let third=arr[2];
@@ -123,7 +142,7 @@ function Kmeans(arr) {
         }
         
     }  
-    // return clusters;
+    return clusters;
 }
 function drawAndColor(x,y,color) {
     fill(color);

@@ -10,12 +10,19 @@
 </head>
 <body>
         <h1>K-Means Clustering</h1>
-        <button id="randomize-button">Randomize</button>
-
-
+        <button id="randomize-button">Refresh</button>
+        <button id="regenerate">Regenerate</button>
         <button id="cluster">Begin Cluster</button>
+        <input type="range" name="datasetter" id="datasetter",min="10",max="40" value="10">
         <!-- <button id ="pause">Pause</button> -->
-    <h2>Iteration :<div id="iteration_number"> 0</div></h2>
+        <h2>Iteration :<div id="iteration_number"> 0</div></h2>
+        <!-- <table id="table_">
+            <tr>
+                <th>X</th>
+                <th>Y</th>
+                <th>Cluster</th>
+            </tr>
+        </table> -->
     <script  src="k_means_clustering.js" type="module"></script>
     <script src="sketch.js"></script>
     </body>
