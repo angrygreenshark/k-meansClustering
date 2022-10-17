@@ -1,13 +1,11 @@
+// import {Kmeans} from './kmeansclustering';
+// import {CalculateDist} from './calculateDist';
+// import {drawAndColor} from './drawAndcolorelipse';
+// import {generateRandomVectors} from './generateVectors';
 const width=400;
 const height=600;
-let randomWidth=Math.random()*width;
-let randomHeight=Math.random()*height;
 const colors=['blue','red'];
 let dataset=10;
-//     const pauseButton=document.getElementById("pause");
-//     pauseButton.addEventListener("click",()=>{
-    
-    // })
     // * dataset 
 const slider=document.getElementById("datasetter");
 let sorting_speed=slider.value
@@ -23,7 +21,8 @@ regenerate_button.addEventListener("click",()=>{
 }); 
 // * randomise collection
 const randomise_button=document.getElementById("randomize-button");
-randomise_button.addEventListener('click',()=>{window.location.reload();
+randomise_button.addEventListener('click',()=>{
+    window.location.reload();
     clear();
     draw();
 });
@@ -33,7 +32,6 @@ function setup() {
 function draw() {
     frameRate(0);
     let arr=generateRandomVectors(dataset);
-    // console.log(arr);
     // * pause button
     const cluster_button=document.getElementById("cluster");
     cluster_button.addEventListener('click',()=>{
@@ -42,7 +40,6 @@ function draw() {
     Kmeans(arr);
     // generateTable(Kmeans);
     });
-    // *
     let k=3;
     background('white');
     fill('black');
@@ -52,16 +49,21 @@ function draw() {
     // (0,0) point
     ellipse(0, 0, 8)
     for (let l = 0; l < arr.length; l++) {
-        let x=abs(arr[l].x);
-        let y=abs(arr[l].y);
-        // console.log("random:"+x*randomWidth,y*randomHeight);
-        drawAndColor(x*randomWidth,y*randomHeight,"yellow");
+        let x=(arr[l].x);
+        let y=(arr[l].y);
+        drawAndColor(x,y,"yellow");
     }
 }
 function generateRandomVectors(number) {
     let array=[];
+    let temp,tempx,tempy;
     for(let i=0;i<number;i++){
-       array.push(p5.Vector.random2D());
+    temp=p5.Vector.random2D();
+    tempx=abs(temp.x*Math.random()*width);
+    tempy=abs(temp.y*Math.random()*height);
+    temp.x=tempx;
+    temp.y=tempy;
+    array.push(temp);
     }
     return array;
 }
@@ -107,7 +109,6 @@ function CalculateDist(v1,v2) {
 // k-means-clustering function
 function Kmeans(arr) {
     // let iteration=1;
-    
     let first=arr[0];
     let second=arr[1];
     // let third=arr[2];
@@ -124,7 +125,6 @@ function Kmeans(arr) {
        }else{ 
     //    if(dist2<dist && dist2<dist3){
         clusters[1].push(arr[j]);
-        // drawAndColor(arr[j].x*random(width),arr[j].y*random(height),"green")
        }
     // else{
     //     clusters[2].push(arr[j]);
@@ -136,11 +136,8 @@ function Kmeans(arr) {
             let absvalueX=Math.abs(clusters[n][index].x);
             let absvalueY=Math.abs(clusters[n][index].y);
             fill('red');
-            drawAndColor(absvalueX*randomWidth,absvalueY*randomHeight,colors[n])
-            // ellipse(absvalueX*random(width),absvalueY*random(height),9);
-            // console.log(`This is the value of Cluster ${n},and value ${index}:x:${absvalueX*random(width)},y:${absvalueY*random(height)}`);
+            drawAndColor(absvalueX,absvalueY,colors[n])
         }
-        
     }  
     return clusters;
 }
